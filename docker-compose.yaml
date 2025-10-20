@@ -16,6 +16,34 @@ services:
       - neo4j_logs:/logs
     restart: unless-stopped
 
+  postgres:
+    image: postgres:13
+    container_name: airflow_postgres
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  airflow:
+    image: apache/airflow:${AIRFLOW_VERSION}-python3.10
+    container_name: airflow
+    depends_on:
+      - postgres
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor #(simpler, runs everything in one process) and Postgres as the backend.
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__WEBSERVER__AUTHENTICATE=False
+      - AIRFLOW__WEBSERVER__RBAC=False
+      - AIRFLOW__CORE__LOAD_EXAMPLES=True
+    ports:
+      - "${AIRFLOW_WEBSERVER_PORT}:8080"
+    command: webserver
+    restart: unless-stopped
+  
 volumes:
   neo4j_data:
   neo4j_logs:
+  pg_data:
