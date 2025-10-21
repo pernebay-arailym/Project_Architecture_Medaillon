@@ -1,1 +1,39 @@
 # Config Prometheus
+
+#global:
+#  scrape_interval: 15s
+#
+#scrape_configs:
+#  - job_name: 'prometheus'
+#    static_configs:
+#      - targets: ['localhost:9090']
+#
+#  - job_name: 'airflow'
+#    metrics_path: /metrics
+#    static_configs:
+#      - targets: ['airflow:8080']  # airflow webserver exposes some metrics when configured
+#
+#  - job_name: 'marquez'
+#    metrics_path: /metrics
+#    static_configs:
+#      - targets: ['marquez:5000']
+#
+#  prometheus:
+#    image: prom/prometheus:${PROMETHEUS_VERSION}
+#    container_name: prometheus
+#    volumes:
+#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+#    ports:
+#      - "${PROMETHEUS_PORT}:9090"
+#    restart: unless-stopped
+#
+#  grafana:
+#    image: grafana/grafana:${GRAFANA_VERSION}
+#    container_name: grafana
+#    environment:
+#      - GF_SECURITY_ADMIN_PASSWORD=admin   # OK for dev only
+#    ports:
+#      - "${GRAFANA_PORT}:3000"
+#    depends_on:
+#      - prometheus
+#    restart: unless-stopped

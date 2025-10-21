@@ -25,6 +25,7 @@ services:
       - POSTGRES_DB=airflow
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d # to initialize marquez DB
     restart: unless-stopped
 
   airflow:
@@ -42,6 +43,34 @@ services:
       - "${AIRFLOW_WEBSERVER_PORT}:8080"
     command: webserver
     restart: unless-stopped
+  
+  # marquez:
+  #   image: marquezproject/marquez:${MARQUEZ_VERSION}
+  #   platform: linux/amd64
+  #   container_name: marquez
+  #   environment:
+  #     - MARQUEZ_PORT=5000
+  #     - MARQUEZ_DB_USER=airflow
+  #     - MARQUEZ_DB_PASSWORD=airflow
+  #     - MARQUEZ_DB_HOST=postgres
+  #     - MARQUEZ_DB_NAME=marquez
+  #     - MARQUEZ_DB_PORT=5432
+  #     - MARQUEZ_AUTH_ENABLED=false
+  #   ports:
+  #     - "${MARQUEZ_PORT}:5000"
+  #   depends_on:
+  #     - postgres
+  #   restart: unless-stopped
+  #
+  # prometheus:
+  #   image: prom/prometheus:${PROMETHEUS_VERSION}
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./grafana/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #   ports:
+  #     - "${PROMETHEUS_PORT}:9090"
+  #   restart: unless-stopped
+
   
 volumes:
   neo4j_data:
