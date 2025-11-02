@@ -1,0 +1,33 @@
+# --- Python general ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# --- Virtual environments ---
+venv/
+env/
+.ge-env/
+ge-env/
+.venv/
+
+# --- Jupyter notebooks checkpoints ---
+.ipynb_checkpoints/
+
+# --- macOS system files ---
+.DS_Store
+
+# --- IDE files ---
+.vscode/
+.idea/
+
+# --- Build outputs ---
+build/
+dist/
+
+# --- Great Expectations cache/data ---
+great_expectations/uncommitted/
