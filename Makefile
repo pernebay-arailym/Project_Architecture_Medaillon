@@ -8,3 +8,6 @@ bronze:
 
 check_quality:
 	python3 quality/gx_checkpoint.py --in data/bronze
+
+silver:
+	python3 scripts/partition_edges.py --in data/bronze --out data/silver --partitions 8
