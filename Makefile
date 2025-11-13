@@ -5,3 +5,6 @@ seed:
 
 bronze:
 	python3 scripts/to_parquet.py --in data/raw --out data/bronze
+
+check_quality:
+	python3 quality/gx_checkpoint.py --in data/bronze
