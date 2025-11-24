@@ -6,9 +6,8 @@ import pandas as pd
 
 
 def convert_csv_to_parquet(input_dir: str, output_dir: str):
-    """
-    Convert CSV files in input_dir to Parquet files in output_dir.
-    """
+    #Convert CSV files in input_dir to Parquet files in output_dir.
+    
     os.makedirs(output_dir, exist_ok=True)
 
     # Define file paths

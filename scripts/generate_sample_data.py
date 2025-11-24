@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def generate_nodes(num_nodes: int) -> pd.DataFrame:
-    """Generate synthetic node data."""
+    #Generate synthetic node data.
     labels = np.random.choice(["Person", "Org", "Paper"], size=num_nodes)
     names = [f"name_{i}" for i in range(num_nodes)]
     df_nodes = pd.DataFrame(
@@ -16,7 +16,7 @@ def generate_nodes(num_nodes: int) -> pd.DataFrame:
 
 
 def generate_edges(num_edges: int, num_nodes: int) -> pd.DataFrame:
-    """Generate synthetic edge data."""
+    #Generate synthetic edge data.
     src = np.random.randint(0, num_nodes, size=num_edges)
     dst = np.random.randint(0, num_nodes, size=num_edges)
     rel_types = np.random.choice(["REL", "ASSOCIATED_WITH", "CITED"], size=num_edges)
